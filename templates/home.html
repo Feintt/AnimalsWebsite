@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+<!-- This is the home page title-->
+{% block page_title %}
+    Home - Paws Rescue Center
+{% endblock %}
+
+<!-- This is the home content-->
+{% block content %}
+    <h1 class="title" style="text-align: center">Paws Rescue Center 🐾</h1>
+      <table>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Bio</th>
+        </tr>
+          {% for pet in pets %}
+              <tr>
+                  <td><img height="100" src="{{ url_for('static', filename=pet['ID']|string+'.jpg') }}" alt="cat image1"></td>
+                  <td>{{ pet['name'] }}</td>
+                  <td>{{ pet['age'] }}</td>
+                  <td>{{ pet['bio'] }}</td>
+              </tr>
+          {% endfor %}
+      </table>
+{% endblock %}

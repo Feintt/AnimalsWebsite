@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+<!-- This is the page title -->
+{% block page_title %}
+    {{ pet['name'] }} - Edit
+{% endblock %}
+
+<!-- This is the page content -->
+{% block content %}
+    <table>
+        <tr>
+            <td><img height="350" src="{{ url_for('static', filename=pet['ID']|string+'.jpg') }}" alt="cat image"></td>
+            <td>{{ pet['name'] }}</td>
+            <td>{{ pet['age'] }}</td>
+            <td>{{ pet['bio'] }}</td>
+        </tr>
+    </table>
+    <form action="{{ url_for('edit', pet_id=pet['ID']) }}" method="post">
+        {{ form.name.label }}
+        {{ form.name(value=pet['name']) }}<br>
+        {{ form.age.label }}
+        {{ form.age(value=pet['age']) }}<br>
+        {{ form.bio.label }}
+        {{ form.bio(value=pet['bio']) }}<br>
+        {{ form.csrf_token }}
+        {{ form.submit() }}
+    </form>
+    <form action="{{ url_for('delete', pet_id=pet['ID']) }}" method="post">
+        {{ form.csrf_token }}
+        {{ form.delete_pet() }}
+    </form>
+{% endblock %}
